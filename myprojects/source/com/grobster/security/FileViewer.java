@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.nio.file.*;
+import java.util.List;
 
 
 public class FileViewer implements Serializable {
@@ -81,8 +82,8 @@ public class FileViewer implements Serializable {
 		frame.getContentPane().add(BorderLayout.SOUTH, fileInfoPanel);
 		
 		pathField.setText(myDirectory.getCurrentDirectory().toString());
-		addFileNamesToArea(faveArea);
-		addFileNamesToArea();
+		addFileNamesToArea(faveArea, myDirectory.getFiles());
+		addFileNamesToArea(area, myDirectory.getEncryptedFiles());
 		resetSearchField();
 		frame.setVisible(true);
 	}
@@ -100,14 +101,8 @@ public class FileViewer implements Serializable {
 		return false;
 	}
 	
-	public void addFileNamesToArea() { // to encrypted area
-		for (Path p: myDirectory.getEncryptedFiles()) {
-			area.append(p.toString() + "\n");
-		}
-	}
-	
-	public void addFileNamesToArea(JTextArea textArea) {
-		for (Path p: myDirectory.getFiles()) {
+	public void addFileNamesToArea(JTextArea textArea, List<Path> dir) {
+		for (Path p: dir) {
 			textArea.append(p.toString() + "\n");
 		}
 	}
@@ -153,7 +148,7 @@ public class FileViewer implements Serializable {
 				myDirectory.setCurrentDirectory(p);
 				pathField.setText(myDirectory.getCurrentDirectory().toString());
 				faveArea.setText("");
-				addFileNamesToArea(faveArea);			
+				addFileNamesToArea(faveArea, myDirectory.getFiles());			
 			}
 
 		}
@@ -164,7 +159,7 @@ public class FileViewer implements Serializable {
 				myDirectory.setCurrentDirectory(p);
 				pathField.setText(myDirectory.getCurrentDirectory().toString());
 				faveArea.setText("");
-				addFileNamesToArea(faveArea);			
+				addFileNamesToArea(faveArea, myDirectory.getFiles());			
 			}
 		}
 	}
@@ -178,7 +173,7 @@ public class FileViewer implements Serializable {
 			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 				search();
 				faveArea.setText("");
-				addFileNamesToArea(faveArea);			
+				addFileNamesToArea(faveArea, myDirectory.getFiles());			
 			}
 
 		}
@@ -187,7 +182,7 @@ public class FileViewer implements Serializable {
 			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 				search();
 				faveArea.setText("");
-				addFileNamesToArea(faveArea);			
+				addFileNamesToArea(faveArea, myDirectory.getFiles());			
 			}
 		}	
 	}
