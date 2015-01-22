@@ -11,7 +11,10 @@ public interface MyDirectoryInterface extends Serializable {
 	public boolean createFile(Path p);
 	public boolean createDirectory(Path p);
 	public List<Path> getFiles();
+	public List<Path> getEncryptedFiles();
 	public Path getCurrentDirectory();
 	public void setCurrentDirectory(Path p);
+	public Path getEncryptedDirectory();
+
 	
 }

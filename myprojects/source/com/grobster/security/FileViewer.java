@@ -27,6 +27,7 @@ public class FileViewer implements Serializable {
 	public FileViewer(MyDirectoryInterface myDirectory) {
 		this.myDirectory = myDirectory;
 		this.myDirectory.getCurrentDirectory();
+		this.myDirectory.getEncryptedDirectory();
 		Path p = Paths.get("encrypted");
 		MyDirectory.createEncryptedDirectory();
 		
@@ -80,6 +81,7 @@ public class FileViewer implements Serializable {
 		frame.getContentPane().add(BorderLayout.SOUTH, fileInfoPanel);
 		
 		pathField.setText(myDirectory.getCurrentDirectory().toString());
+		addFileNamesToArea(faveArea);
 		addFileNamesToArea();
 		resetSearchField();
 		frame.setVisible(true);
@@ -98,9 +100,15 @@ public class FileViewer implements Serializable {
 		return false;
 	}
 	
-	public void addFileNamesToArea() {
+	public void addFileNamesToArea() { // to encrypted area
+		for (Path p: myDirectory.getEncryptedFiles()) {
+			area.append(p.toString() + "\n");
+		}
+	}
+	
+	public void addFileNamesToArea(JTextArea textArea) {
 		for (Path p: myDirectory.getFiles()) {
-			faveArea.append(p.toString() + "\n");
+			textArea.append(p.toString() + "\n");
 		}
 	}
 	
@@ -145,7 +153,7 @@ public class FileViewer implements Serializable {
 				myDirectory.setCurrentDirectory(p);
 				pathField.setText(myDirectory.getCurrentDirectory().toString());
 				faveArea.setText("");
-				addFileNamesToArea();			
+				addFileNamesToArea(faveArea);			
 			}
 
 		}
@@ -156,7 +164,7 @@ public class FileViewer implements Serializable {
 				myDirectory.setCurrentDirectory(p);
 				pathField.setText(myDirectory.getCurrentDirectory().toString());
 				faveArea.setText("");
-				addFileNamesToArea();			
+				addFileNamesToArea(faveArea);			
 			}
 		}
 	}
@@ -170,7 +178,7 @@ public class FileViewer implements Serializable {
 			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 				search();
 				faveArea.setText("");
-				addFileNamesToArea();			
+				addFileNamesToArea(faveArea);			
 			}
 
 		}
@@ -179,7 +187,7 @@ public class FileViewer implements Serializable {
 			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 				search();
 				faveArea.setText("");
-				addFileNamesToArea();			
+				addFileNamesToArea(faveArea);			
 			}
 		}	
 	}

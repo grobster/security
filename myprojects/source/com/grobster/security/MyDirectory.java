@@ -9,7 +9,9 @@ public class MyDirectory implements MyDirectoryInterface, Serializable {
 	private static final long serialVersionUID = 1276733217262648335L;
 	private Path currentDirectory;
 	private ArrayList<Path> currentDirectoryFiles;
+	private ArrayList<Path> encryptedDirectoryFiles;
 	public final static String ENCRYPTED_FOLDER_NAME = "encrypted";
+	public final static Path ENCRYPTED_DIRECTORY_PATH = Paths.get(ENCRYPTED_FOLDER_NAME);
 	
 	public MyDirectory() {}
 	
@@ -17,16 +19,33 @@ public class MyDirectory implements MyDirectoryInterface, Serializable {
 		this.currentDirectory = currentDirectory;
 	}
 	
+	public List<Path> getEncryptedFiles() {
+		return encryptedDirectoryFiles;
+	}
+	
+	public Path getEncryptedDirectory() {
+		encryptedDirectoryFiles = new ArrayList<>();
+		
+		try (DirectoryStream<Path> stream = Files.newDirectoryStream(ENCRYPTED_DIRECTORY_PATH)) {
+			for (Path path: stream) {
+                encryptedDirectoryFiles.add(path);
+				System.out.println(path);
+            }
+        } catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		return ENCRYPTED_DIRECTORY_PATH;
+	}
+	
 	public static boolean createEncryptedDirectory() {
-		Path encryptedDirectory = Paths.get(MyDirectory.ENCRYPTED_FOLDER_NAME);
 		try {
-			if (!Files.exists(encryptedDirectory)) {
-				Files.createDirectory(encryptedDirectory);
+			if (!Files.exists(ENCRYPTED_DIRECTORY_PATH)) {
+				Files.createDirectory(ENCRYPTED_DIRECTORY_PATH);
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		if (Files.exists(encryptedDirectory)) {
+		if (Files.exists(ENCRYPTED_DIRECTORY_PATH)) {
 			return true;
 		}
 		return false;
