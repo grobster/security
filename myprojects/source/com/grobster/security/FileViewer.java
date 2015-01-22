@@ -61,7 +61,7 @@ public class FileViewer implements Serializable {
 
 		navigateBackwardButton = new JButton("<<");
 		pathPanel.add(navigateBackwardButton);
-		navigateBackwardButton.addActionListener(e -> save());
+		//navigateBackwardButton.addActionListener(e -> save());
 		
 		naviateForwardButton = new JButton(">>");
 		pathPanel.add(naviateForwardButton);
