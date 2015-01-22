@@ -17,6 +17,21 @@ public class MyDirectory implements MyDirectoryInterface, Serializable {
 		this.currentDirectory = currentDirectory;
 	}
 	
+	public static boolean createEncryptedDirectory() {
+		Path encryptedDirectory = Paths.get(MyDirectory.ENCRYPTED_FOLDER_NAME);
+		try {
+			if (!Files.exists(encryptedDirectory)) {
+				Files.createDirectory(encryptedDirectory);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		if (Files.exists(encryptedDirectory)) {
+			return true;
+		}
+		return false;
+	}
+	
 	public boolean searchDirectory(Path p, String filter) {
 		if (Files.isDirectory(p)) {
 			currentDirectoryFiles = new ArrayList<>();

@@ -28,10 +28,7 @@ public class FileViewer implements Serializable {
 		this.myDirectory = myDirectory;
 		this.myDirectory.getCurrentDirectory();
 		Path p = Paths.get("encrypted");
-		if (!Files.exists(p)) {
-			//create encryptedFolder
-			MyDirectory.createEncryptedDirectory(p);
-		}
+		MyDirectory.createEncryptedDirectory();
 		
 	}
 	
@@ -49,7 +46,7 @@ public class FileViewer implements Serializable {
 		scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		frame.getContentPane().add(BorderLayout.CENTER, scroller);
 		
-		faveArea = new JTextArea(10, 15);
+		faveArea = new JTextArea(10, 30);
 		faveScroller = new JScrollPane(faveArea);
 		faveScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		faveScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -103,7 +100,7 @@ public class FileViewer implements Serializable {
 	
 	public void addFileNamesToArea() {
 		for (Path p: myDirectory.getFiles()) {
-			area.append(p.toString() + "\n");
+			faveArea.append(p.toString() + "\n");
 		}
 	}
 	
@@ -147,7 +144,7 @@ public class FileViewer implements Serializable {
 				Path p = Paths.get(pathField.getText());
 				myDirectory.setCurrentDirectory(p);
 				pathField.setText(myDirectory.getCurrentDirectory().toString());
-				area.setText("");
+				faveArea.setText("");
 				addFileNamesToArea();			
 			}
 
@@ -158,7 +155,7 @@ public class FileViewer implements Serializable {
 				Path p = Paths.get(pathField.getText());
 				myDirectory.setCurrentDirectory(p);
 				pathField.setText(myDirectory.getCurrentDirectory().toString());
-				area.setText("");
+				faveArea.setText("");
 				addFileNamesToArea();			
 			}
 		}
@@ -172,7 +169,7 @@ public class FileViewer implements Serializable {
 		public void keyTyped(KeyEvent e) {
 			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 				search();
-				area.setText("");
+				faveArea.setText("");
 				addFileNamesToArea();			
 			}
 
@@ -181,7 +178,7 @@ public class FileViewer implements Serializable {
 		public void keyReleased(KeyEvent e) {
 			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 				search();
-				area.setText("");
+				faveArea.setText("");
 				addFileNamesToArea();			
 			}
 		}	
