@@ -28,8 +28,8 @@ public class MyDirectory implements MyDirectoryInterface, Serializable {
 		
 		try (DirectoryStream<Path> stream = Files.newDirectoryStream(ENCRYPTED_DIRECTORY_PATH)) {
 			for (Path path: stream) {
-                encryptedDirectoryFiles.add(path);
-				System.out.println(path);
+                encryptedDirectoryFiles.add(path.getFileName());
+				System.out.println(path.getFileName());
             }
         } catch (IOException ex) {
 			ex.printStackTrace();
@@ -58,8 +58,8 @@ public class MyDirectory implements MyDirectoryInterface, Serializable {
 			try (DirectoryStream<Path> stream = Files.newDirectoryStream(p)) {
 				for (Path path: stream) {
 					if (path.getFileName().toString().contains(filter)) {
-						currentDirectoryFiles.add(path);
-						System.out.println(path);					
+						currentDirectoryFiles.add(path.getFileName());
+						System.out.println(path.getFileName());					
 					}
 				}
 				return true;
@@ -106,8 +106,8 @@ public class MyDirectory implements MyDirectoryInterface, Serializable {
 		
 		try (DirectoryStream<Path> stream = Files.newDirectoryStream(currentDirectory)) {
 			for (Path path: stream) {
-                currentDirectoryFiles.add(path);
-				System.out.println(path);
+                currentDirectoryFiles.add(path.getFileName());
+				System.out.println(path.getFileName());
             }
         } catch (IOException ex) {
 			ex.printStackTrace();
