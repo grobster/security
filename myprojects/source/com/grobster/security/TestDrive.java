@@ -16,7 +16,7 @@ public class TestDrive {
 			try {
 				String newPassword = JOptionPane.showInputDialog(null, "Enter New Password"); //prompt user to enter password
 				if (!newPassword.equals("") && newPassword.length() > 0) { //ensure password was entered
-					String newPasswordConfirmed = JOptionPane.showInputDialog(null, "Enter New Password Again"); // prompt for password again
+					String newPasswordConfirmed = JOptionPane.showInputDialog(null, "Confirm New Password"); // prompt for password again
 					if (newPasswordConfirmed.equals(newPassword)) { //ensure passwords match
 						password = new Password(); //new password object
 						password.setPassword(newPasswordConfirmed); //set password to confirmed user entered password
