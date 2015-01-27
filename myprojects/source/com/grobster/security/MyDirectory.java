@@ -57,7 +57,7 @@ public class MyDirectory implements MyDirectoryInterface, Serializable {
 			
 			try (DirectoryStream<Path> stream = Files.newDirectoryStream(p)) {
 				for (Path path: stream) {
-					if (path.getFileName().toString().contains(filter)) {
+					if (path.getFileName().toString().toLowerCase().contains(filter.toLowerCase())) {
 						currentDirectoryFiles.add(path.getFileName());
 						System.out.println(path.getFileName());					
 					}
