@@ -60,7 +60,7 @@ public class FileViewer implements Serializable {
 
 		navigateBackwardButton = new JButton("<<");
 		pathPanel.add(navigateBackwardButton);
-		//navigateBackwardButton.addActionListener(e -> save());
+		navigateBackwardButton.addActionListener(new NavigateBackListener());
 		
 		naviateForwardButton = new JButton(">>");
 		pathPanel.add(naviateForwardButton);
@@ -185,5 +185,16 @@ public class FileViewer implements Serializable {
 				addFileNamesToArea(faveArea, myDirectory.getFiles());			
 			}
 		}	
+	}
+	
+	class NavigateBackListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			Path p = Paths.get(pathField.getText());
+			Path parent = p.getParent();
+			myDirectory.setCurrentDirectory(parent);
+			pathField.setText(myDirectory.getCurrentDirectory().toString());
+			faveArea.setText("");
+			addFileNamesToArea(faveArea, myDirectory.getFiles());
+		}
 	}
 }
