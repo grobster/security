@@ -23,6 +23,9 @@ public class MyDirectory implements MyDirectoryInterface, Serializable {
 		return encryptedDirectoryFiles;
 	}
 	
+	/**
+	 * This method gets all of the files in the Encrypted directory.
+	 */
 	public Path getEncryptedDirectory() {
 		encryptedDirectoryFiles = new ArrayList<>();
 		
@@ -36,6 +39,10 @@ public class MyDirectory implements MyDirectoryInterface, Serializable {
 		}
 		return ENCRYPTED_DIRECTORY_PATH;
 	}
+	
+	/**
+	 * This methods creates the createEncryptedDirectory.
+	 */
 	
 	public static boolean createEncryptedDirectory() {
 		try {
@@ -51,6 +58,11 @@ public class MyDirectory implements MyDirectoryInterface, Serializable {
 		return false;
 	}
 	
+	/**
+	 * Method searches current directory and returns result.
+	 * @param Path p
+	 * @param String filter
+	 */
 	public boolean searchDirectory(Path p, String filter) {
 		if (Files.isDirectory(p)) {
 			currentDirectoryFiles = new ArrayList<>();
@@ -74,6 +86,10 @@ public class MyDirectory implements MyDirectoryInterface, Serializable {
 		return false;
 	}
 	
+	/**
+	 * Method deletes a file.
+	 * @param Path p
+	 */ 
 	public boolean deleteFile(Path p) {
 		try {
 			return Files.deleteIfExists(p);
@@ -83,6 +99,10 @@ public class MyDirectory implements MyDirectoryInterface, Serializable {
 		return false;
 	}
 	
+	/**
+	 * Method creats a file.
+	 * @param Path p
+	 */
 	public boolean createFile(Path p) {
 		try {
 			Path file = Files.createFile(p);
@@ -93,10 +113,17 @@ public class MyDirectory implements MyDirectoryInterface, Serializable {
 		return false;
 	}
 	
+	/**
+	 * Method creates a directory.
+	 * @param Path p
+	 */
 	public boolean createDirectory(Path p) {
 		return false;
 	}
 	
+	/**
+	 * Method returns the files in the current directory.
+	 */
 	public List<Path> getFiles() {
 		return currentDirectoryFiles;
 	}
@@ -119,6 +146,11 @@ public class MyDirectory implements MyDirectoryInterface, Serializable {
 		currentDirectory = p;
 	}
 	
+	/**
+	 * Method creates an encrypted directory
+	 * overloaded method
+	 * @param Path p
+	 */
 	public static boolean createEncryptedDirectory(Path p) {
 		try {
 			Files.createDirectory(p);
