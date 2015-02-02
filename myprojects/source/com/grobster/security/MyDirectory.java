@@ -43,7 +43,6 @@ public class MyDirectory implements MyDirectoryInterface, Serializable {
 	/**
 	 * This methods creates the createEncryptedDirectory.
 	 */
-	
 	public static boolean createEncryptedDirectory() {
 		try {
 			if (!Files.exists(ENCRYPTED_DIRECTORY_PATH)) {
@@ -150,6 +149,7 @@ public class MyDirectory implements MyDirectoryInterface, Serializable {
 	 * Method creates an encrypted directory
 	 * overloaded method
 	 * @param Path p
+	 * @return boolean true if encrypted directory created; false otherwise
 	 */
 	public static boolean createEncryptedDirectory(Path p) {
 		try {
